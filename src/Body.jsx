@@ -6,10 +6,10 @@ import Reportes from "./Reportes"
 import Usuarios from "./Usuarios"
 import './Body.css'
 
-function Body({vista}){
+function Body({ vista, setVista }) {
     console.log("La vista actual es:", vista);
     const vistas={
-        InicioS:<InicioS/>,
+        InicioS: <InicioS onLogin={() => setVista("Ventas")} />, //cuando te logues correctamente cambiara segun lo que indique el setVista()
         Inicio:<Inicio/>,
         Productos:<Productos/>,
         Ventas:<Ventas/>,
@@ -19,6 +19,7 @@ function Body({vista}){
     return(
         <div className="Body">
             {vistas[vista] || <Inicio />}
+            
         </div>
     )
 }

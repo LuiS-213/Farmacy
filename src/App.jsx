@@ -18,7 +18,7 @@ function App() {
             setMenu(false);
         }} 
       />
-      <Body vista={vista}/>
+      <Body vista={vista} setVista={setVista} />
     </div>
   )
 }
