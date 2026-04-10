@@ -1,51 +1,52 @@
-import React from 'react';
+import { useState } from 'react';
 
-function Reportes() {
-  
-  const datosReporte = [
-    { id: 101, producto: "Paracetamol", cantidad: 50, estado: "En Stock", total: 2250 },
-    { id: 102, producto: "Amoxicilina", cantidad: 12, estado: "Stock Bajo", total: 1740 },
-    { id: 103, producto: "Alcohol Etílico", cantidad: 0, estado: "Agotado", total: 0 },
-    { id: 104, producto: "Vitamina C", cantidad: 100, estado: "En Stock", total: 12000 },
-  ];
+function ReporteInventario() {
+    // Datos de prueba para el inventario
+    const [inventario] = useState([
+        { id: 1, codigo: "750123", producto: "Paracetamol 500mg", stock: 150, stockMinimo: 50, precio: 10.50 },
+        { id: 2, codigo: "750456", producto: "Amoxicilina 250mg", stock: 12, stockMinimo: 20, precio: 85.00 },
+        { id: 3, codigo: "750789", producto: "Vitamina C 1g", stock: 0, stockMinimo: 15, precio: 45.00 },
+        { id: 4, codigo: "750321", producto: "Alcohol 500ml", stock: 85, stockMinimo: 30, precio: 25.50 }
+    ]);
 
-  return (
-    <div>
-      <h1>Reporte de Inventario</h1>
-      <p>Resumen detallado de existencias y valor total.</p>
+    return (
+        <div>
+            <h1>Reporte de Inventario</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Estado</th>
-            <th>Valor Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          {datosReporte.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.producto}</td>
-              <td>{item.cantidad} unidades</td>
-              <td>
-                {item.estado}
-              </td>
-              <td>${item.total.toLocaleString()}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div>
-        <button>
-          Imprimir Reporte (PDF)
-        </button>
-      </div>
-    </div>
-  );
+            <table>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Stock Actual</th>
+                        <th>Stock Mínimo</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {inventario.map((item) => (
+                        <tr key={item.id}>
+                            <td>{item.codigo}</td>
+                            <td>{item.producto}</td>
+                            <td>{item.stock} unidades</td>
+                            <td>{item.stockMinimo}</td>
+                            <td>${item.precio}</td>
+                            <td>
+                                {item.stock <= 0 ? "Agotado" : 
+                                 item.stock < item.stockMinimo ? "Bajo Stock" : "OK"}
+                            </td>
+                            <td>
+                                <button>Editar</button>
+                                <button>Historial</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
-export default Reportes;
+export default ReporteInventario;

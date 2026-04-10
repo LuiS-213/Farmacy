@@ -1,0 +1,23 @@
+.Header {
+  display: flex;          
+  flex-direction: row;    
+  align-items: center;    
+  padding: 10px 20px;
+  background-color: #20232a; 
+  color: white;
+  width: 100%;            
+}
+
+.boton-menu {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  margin-right: 15px;   
+}
+
+.Header h1 {
+  margin: 0;           
+  font-size: 1.5rem;
+}

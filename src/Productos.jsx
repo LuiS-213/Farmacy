@@ -1,62 +1,42 @@
-
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function Productos() {
-    const [productos, setProductos] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+    // 1. Agregamos datos de prueba directamente aquí para que se vea algo
+    const [productos] = useState([
+        { id: 1, title: "Paracetamol", price: 10.50, category: "Farmacia", image: "https://via.placeholder.com/150" },
+        { id: 2, title: "Vitamina C", price: 25.00, category: "Suplementos", image: "https://via.placeholder.com/150" },
+        { id: 3, title: "Alcohol Gel", price: 15.00, category: "Higiene", image: "https://via.placeholder.com/150" },
+        { id: 4, title: "Gasas Estériles", price: 5.00, category: "Curación", image: "https://via.placeholder.com/150" }
+    ]);
 
-    const obtenerProductos = async () => {
-        try {
-            const response = await api.get("/products");
-            setProductos(response.data);
-        } catch (error) {
-            console.error("Error al obtener productos:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        obtenerProductos();
-    }, []);
+    // Dejamos el loading en false para que no bloquee la vista
+    const [loading] = useState(false);
 
     if (loading) return <p className="cargando">Cargando catálogo...</p>;
 
     return (
         <div className="contenedor-principal">
-            <RegistrarProductos
-                productoEditando={productoSeleccionado}
-                limpiarSeleccion={() => setProductoSeleccionado(null)}
-                onActualizacionExitosa={obtenerProductos}
-            />
-            
             <header className="productos-header">
                 <h1>Nuestros Productos</h1>
             </header>
             
             <main className="grid-productos">
                 {productos.map((producto) => (
-                    /* carta / tarjeta */
                     <article key={producto.id} className="tarjeta-producto">
                         <div className="imagen-wrapper">
-                            <img src={producto.image} alt={producto.title} />
+                            <img src={producto.image} alt={producto.title} style={{width: '100px'}} />
                         </div>
                         
                         <div className="info-producto">
                             <span className="categoria">{producto.category}</span>
                             <h2>{producto.title}</h2> 
-                            <p className="descripcion">{producto.description}</p>
-                            <p className="precio">${producto.price}</p>
+                            <p className="precio"><strong>${producto.price}</strong></p>
                             
-                            {/* Botones de accion */}
-                            <button className="btn-carrito">Añadir al carrito</button>
-                            <button className="btn-editar" onClick={() => setProductoSeleccionado(producto)}>
-                                Editar
-                            </button>
-                            <button className="btn-eliminar" onClick={() => removeProducto(producto.id)}>
-                                Eliminar
-                            </button>
+                            <div className="acciones">
+                                <button className="btn-carrito">Añadir al carrito</button>
+                                <button className="btn-editar">Editar</button>
+                                <button className="btn-eliminar">Eliminar</button>
+                            </div>
                         </div>
                     </article>
                 ))}            
