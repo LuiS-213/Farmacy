@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-function ReporteInventario() {
+
+function ReporteInventario({ setVista }) {
     // Datos de prueba para el inventario
     const [inventario] = useState([
         { id: 1, codigo: "750123", producto: "Paracetamol 500mg", stock: 150, stockMinimo: 50, precio: 10.50 },

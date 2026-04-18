@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-function GestionUsuarios() {
+
+function GestionUsuarios({ setVista }) {
     // Datos de prueba para las cuentas de la farmacia
     const [usuarios] = useState([
         { 

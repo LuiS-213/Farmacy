@@ -23,11 +23,13 @@ const InicioS = ({ onLogin }) => {
             type="email" 
             placeholder="Correo electrónico" 
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <input 
             type="password" 
             placeholder="Contraseña" 
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
           <button type="submit">Entrar</button>
         </form>

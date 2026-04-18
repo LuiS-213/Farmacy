@@ -11,12 +11,12 @@ function Menu({abierto,cambiarVista}){
     return(
         <div className={name}>
             <ul>
-                <li onClick={()=>cambiarVista("InicioS")}>Inicio de Sesion</li>
-                <li onClick={()=>cambiarVista("Inicio")}>Inicio</li>
-                <li onClick={()=>cambiarVista("Productos")}>Productos</li>
-                <li onClick={()=>cambiarVista("Ventas")}>Ventas</li>
-                <li onClick={()=>cambiarVista("Reportes")}>Reportes</li>
-                <li onClick={()=>cambiarVista("Usuarios")}>Usuarios</li>
+    <li onClick={()=>cambiarVista("Inicio")}>Inicio</li>
+    <li onClick={()=>cambiarVista("Productos")}>Productos</li>
+    <li onClick={()=>cambiarVista("Ventas")}>Ventas</li>
+    <li onClick={()=>cambiarVista("Reportes")}>Reportes</li>
+    <li onClick={()=>cambiarVista("Usuarios")}>Usuarios</li>
+    
             </ul>
         </div>
     )

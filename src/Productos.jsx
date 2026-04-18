@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-function Productos() {
-    // 1. Agregamos datos de prueba directamente aquí para que se vea algo
+function Productos({ setVista }) {
+    // Agregamos datos de prueba directamente aquí para que se vea algo
     const [productos] = useState([
-        { id: 1, title: "Paracetamol", price: 10.50, category: "Farmacia", image: "https://via.placeholder.com/150" },
-        { id: 2, title: "Vitamina C", price: 25.00, category: "Suplementos", image: "https://via.placeholder.com/150" },
-        { id: 3, title: "Alcohol Gel", price: 15.00, category: "Higiene", image: "https://via.placeholder.com/150" },
-        { id: 4, title: "Gasas Estériles", price: 5.00, category: "Curación", image: "https://via.placeholder.com/150" }
+        { id: 1, title: "Paracetamol", price: 10.50, category: "Farmacia", image: "https://placehold.co/150x150" },
+        { id: 2, title: "Vitamina C", price: 25.00, category: "Suplementos", image: "https://placehold.co/150x150" },
+        { id: 3, title: "Alcohol Gel", price: 15.00, category: "Higiene", image: "https://placehold.co/150x150" },
+        { id: 4, title: "Gasas Estériles", price: 5.00, category: "Curación", image: "https://placehold.co/150x150" }
     ]);
 
     // Dejamos el loading en false para que no bloquee la vista

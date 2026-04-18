@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-function ReporteVentas() {
+
+function ReporteVentas({ setVista }) {
     // Datos de prueba con el rol de vendedor
     const [ventas] = useState([
         { id: "F-001", fecha: "2026-04-10", vendedor: "Carlos Ruiz", items: 3, total: 150.20, metodo: "Efectivo" },

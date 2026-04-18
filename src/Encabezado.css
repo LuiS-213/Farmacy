@@ -16,6 +16,23 @@
   cursor: pointer;
   margin-right: 15px;   
 }
+.contenedor {
+    position: relative; /* El padre debe ser relativo */
+    width: 100%;
+    height: 100vh; /* Ejemplo: altura de la pantalla */
+}
+
+.boton-salir {
+    position: absolute;
+    top: 15px; /* Ajusta la distancia superior */
+    right: 15px; /* Ajusta la distancia derecha */
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1000; /* Asegura que quede por encima de otros elementos */
+}
 
 .Header h1 {
   margin: 0;           
