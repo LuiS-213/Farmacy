@@ -1,22 +1,33 @@
 import './Menus.css'
 
-function Menu({abierto,cambiarVista}){
-    let name="";
-    if(abierto){
-        name="OpenMenu";
-    }else{
-        name="CloseMenu";
-    }
+function Menu({ abierto, cambiarVista, setAbierto }) {
+    // Simplificamos la asignación de la clase con un ternario
+    const name = abierto ? "OpenMenu" : "CloseMenu";
 
-    return(
+    return (
         <div className={name}>
+            {/* Botón de retroceder / cerrar */}
+            <div className="menu-header">
+                <button 
+    className="btn-retroceder" 
+    onClick={() => {
+        if (typeof setAbierto === 'function') {
+            setAbierto(false);
+        } else {
+            console.error("Error: setAbierto no llegó como función. Valor recibido:", setAbierto);
+        }
+    }}
+>
+    ← Volver
+</button>
+            </div>
+
             <ul>
-    <li onClick={()=>cambiarVista("Inicio")}>Inicio</li>
-    <li onClick={()=>cambiarVista("Productos")}>Productos</li>
-    <li onClick={()=>cambiarVista("Ventas")}>Ventas</li>
-    <li onClick={()=>cambiarVista("Reportes")}>Reportes</li>
-    <li onClick={()=>cambiarVista("Usuarios")}>Usuarios</li>
-    
+                <li onClick={() => cambiarVista("Inicio")}>Inicio</li>
+                <li onClick={() => cambiarVista("Productos")}>Productos</li>
+                <li onClick={() => cambiarVista("Ventas")}>Ventas</li>
+                <li onClick={() => cambiarVista("Reportes")}>Reportes</li>
+                <li onClick={() => cambiarVista("Usuarios")}>Usuarios</li>
             </ul>
         </div>
     )

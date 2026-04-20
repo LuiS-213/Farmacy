@@ -31,6 +31,7 @@ function App() {
             onLogout={handleLogout} 
           />
           <Menu 
+            setAbierto={setMenu}
             abierto={menu}
             cambiarVista={(v) => {
               setVista(v);

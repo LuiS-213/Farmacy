@@ -4,6 +4,7 @@ import Productos from "./Productos"
 import Ventas from "./Ventas"
 import Reportes from "./Reportes"
 import Usuarios from "./Usuarios"
+import NewVentas from "./NewVenta"
 import './Body.css'
 
 function Body({ vista, setVista }) {
@@ -13,6 +14,7 @@ function Body({ vista, setVista }) {
         Inicio: <Inicio setVista={setVista} />,
         Productos: <Productos setVista={setVista} />,
         Ventas: <Ventas setVista={setVista} />,
+        NewVenta: <NewVentas setVista={setVista} />,
         Reportes: <Reportes setVista={setVista} />,
         Usuarios: <Usuarios setVista={setVista} />
     }

@@ -1,48 +1,92 @@
-
+/* CONTENEDOR DEL MENÚ */
 .OpenMenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100%;
-  background: linear-gradient(180deg, #7ca8b6); 
-  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(0);
-  padding-top: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    /* Fondo oscuro traslúcido para que se integre con el fondo de tu app */
+    background: rgba(30, 39, 46, 0.98); 
+    backdrop-filter: blur(10px);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateX(0);
+    z-index: 1000;
+    border-right: 2px solid #2ecc71; /* Una línea delgada verde neón */
 }
 
 .CloseMenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 220px;
-  height: 100%;
-  background: linear-gradient( #ffffffb4);
-  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
-  transform: translateX(-100%);
-  padding-top: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: #1e272e;
+    transform: translateX(-100%);
+    transition: all 0.5s ease-in-out;
 }
 
-.OpenMenu ul, .CloseMenu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* HEADER DEL MENÚ */
+.menu-header {
+    padding: 30px 20px;
+    text-align: center;
 }
 
-.OpenMenu li, .CloseMenu li {
-  padding: 15px 20px;
-  color: #fff;
-  font-family:   serif;
-  font-size: 20px;
-  cursor: pointer;
+.btn-retroceder {
+    background: transparent;
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
+.btn-retroceder:hover {
+    background: #2ecc71;
+    color: #1e272e;
+    box-shadow: 0 0 15px #2ecc71;
+}
+
+/* LISTA DE OPCIONES */
+.OpenMenu ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.OpenMenu li {
+    padding: 20px 25px;
+    color: #8a8e94;
+    font-family: 'Courier New', Courier, monospace; /* Toque de programador */
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.4s;
+    border-left: 0px solid #2ecc71;
+}
+
+/* EFECTO AL PASAR EL MOUSE */
 .OpenMenu li:hover {
-  background: rgba(255,255,255,0.15);
-  padding-left: 30px;
+    color: #fff;
+    background: rgba(46, 204, 113, 0.1);
+    padding-left: 35px;
+    border-left: 8px solid #2ecc71;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
-.CloseMenu li {
-  opacity: 0; 
+/* Pequeño detalle de número antes del texto */
+.OpenMenu li::before {
+    content: "> ";
+    color: #2ecc71;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.OpenMenu li:hover::before {
+    opacity: 1;
 }

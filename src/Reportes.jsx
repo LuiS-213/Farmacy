@@ -1,49 +1,94 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import "./Reportes.css";
 
+function ReporteInventario() {
+    // 1. Empezamos con el inventario vacío
+    const [inventario, setInventario] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
 
-function ReporteInventario({ setVista }) {
-    // Datos de prueba para el inventario
-    const [inventario] = useState([
-        { id: 1, codigo: "750123", producto: "Paracetamol 500mg", stock: 150, stockMinimo: 50, precio: 10.50 },
-        { id: 2, codigo: "750456", producto: "Amoxicilina 250mg", stock: 12, stockMinimo: 20, precio: 85.00 },
-        { id: 3, codigo: "750789", producto: "Vitamina C 1g", stock: 0, stockMinimo: 15, precio: 45.00 },
-        { id: 4, codigo: "750321", producto: "Alcohol 500ml", stock: 85, stockMinimo: 30, precio: 25.50 }
-    ]);
+    // 2. Cargar los datos reales al abrir el reporte
+    useEffect(() => {
+        obtenerInventario();
+    }, []);
+
+    const obtenerInventario = () => {
+        // Usamos la ruta que ya tienes para listar medicamentos
+        fetch('http://localhost:8000/api/medicamentos')
+            .then(res => res.json())
+            .then(data => {
+                setInventario(Array.isArray(data) ? data : []);
+            })
+            .catch(err => console.error("Error al cargar inventario:", err));
+    };
+
+    // 🔎 Filtro de búsqueda
+    const filtrados = inventario.filter(item =>
+        item.nombre.toLowerCase().includes(busqueda.toLowerCase())
+    );
+
+    // 🎨 Lógica de estados con colores (opcional, para que se vea pro en tu TSU)
+    const getEstado = (stock) => {
+        if (stock <= 0) return { texto: "Agotado", clase: "estado-agotado" };
+        if (stock < 20) return { texto: "Stock Bajo", clase: "estado-bajo" };
+        return { texto: "Disponible", clase: "estado-disponible" };
+    };
 
     return (
-        <div>
-            <h1>Reporte de Inventario</h1>
+        <div className="inventario-container">
+            <h1>Reporte de Inventario Real</h1>
 
-            <table>
+            <div className="inventario-buscador">
+                <input
+                    type="text"
+                    placeholder="Buscar medicamento por nombre..."
+                    value={busqueda}
+                    onChange={(e) => setBusqueda(e.target.value)}
+                />
+                <button className="btn-limpiar" onClick={() => setBusqueda("")}>
+                    Limpiar
+                </button>
+            </div>
+
+            <table className="inventario-tabla">
                 <thead>
                     <tr>
-                        <th>Código</th>
-                        <th>Producto</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Categoría</th>
                         <th>Stock Actual</th>
-                        <th>Stock Mínimo</th>
-                        <th>Precio</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th>Precio Unitario</th>
+                        <th>Caducidad</th>
+                        <th>Estatus</th>
                     </tr>
                 </thead>
+
                 <tbody>
-                    {inventario.map((item) => (
-                        <tr key={item.id}>
-                            <td>{item.codigo}</td>
-                            <td>{item.producto}</td>
-                            <td>{item.stock} unidades</td>
-                            <td>{item.stockMinimo}</td>
-                            <td>${item.precio}</td>
-                            <td>
-                                {item.stock <= 0 ? "Agotado" : 
-                                 item.stock < item.stockMinimo ? "Bajo Stock" : "OK"}
-                            </td>
-                            <td>
-                                <button>Editar</button>
-                                <button>Historial</button>
+                    {filtrados.length > 0 ? (
+                        filtrados.map((item) => {
+                            const estado = getEstado(item.stock);
+                            return (
+                                <tr key={item.id_medicamento}>
+                                    <td><strong>{item.nombre}</strong></td>
+                                    <td>{item.descripcion}</td>
+                                    <td>{item.categoria || 'General'}</td>
+                                    <td>{item.stock} unidades</td>
+                                    <td>${Number(item.precio).toFixed(2)}</td>
+                                    <td>{item.fecha_caducidad}</td>
+                                    <td>
+                                        <span className={`badge ${estado.clase}`}>
+                                            {estado.texto}
+                                        </span>
+                                    </td>
+                                </tr>
+                            );
+                        })
+                    ) : (
+                        <tr>
+                            <td colSpan="7" style={{ textAlign: 'center' }}>
+                                No se encontraron medicamentos en la base de datos.
                             </td>
                         </tr>
-                    ))}
+                    )}
                 </tbody>
             </table>
         </div>
